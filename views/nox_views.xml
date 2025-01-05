@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+        <record id="action_professionals" model="ir.actions.act_window">
+            <field name="name">Professionals</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'default_is_professional': True}</field>
+            <field name="domain">[('is_professional', '=', True)]</field>
+        </record>
+
+        <record id="action_institutes" model="ir.actions.act_window">
+            <field name="name">Institutes</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'default_is_institute': True}</field>
+            <field name="domain">[('is_institute', '=', True)]</field>
+        </record>
+
+        <record id="action_laboratories" model="ir.actions.act_window">
+            <field name="name">Laboratories</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'default_is_laboratory': True}</field>
+            <field name="domain">[('is_laboratory', '=', True)]</field>
+        </record>
+
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                    <field name="vat" position="after">>
+                          <field name="is_professional"/>
+                            <field name="is_institute"/>
+                            <field name="is_laboratory"/>
+                    </field>
+            </field>
+        </record>
+        
+        <menuitem id="nox_professionals" name="Professionals" parent="contacts.res_partner_menu_contacts"
+                  action="action_professionals"/>
+
+         <menuitem id="nox_institute" name="Institute" parent="contacts.res_partner_menu_contacts"
+                  action="action_institutes"/>
+
+         <menuitem id="nox_laboratory" name="Laboratory" parent="contacts.res_partner_menu_contacts"
+                  action="action_laboratories"/>
+    </data>
+</odoo>
